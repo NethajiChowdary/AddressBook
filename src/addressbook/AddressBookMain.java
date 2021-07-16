@@ -2,11 +2,9 @@ package addressbook;
 
 import java.util.Scanner;
 
-public class AddressBookMain 
-{
+public class AddressBookMain {
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		
 		Scanner scanner = new Scanner(System.in);
 	
@@ -21,7 +19,7 @@ public class AddressBookMain
 					+ "\n 4 Display Contact "
 					+ "\n 5 Search "
 					+ "\n 6 View Person from same state or city"
-					+ "\n 7 No of person from same state or city"
+					+ "\n 7 No of person from same state or city "
 					+ "\n 8 Quit ");
 			int userChoice = scanner.nextInt();
 			switch (userChoice) 
