@@ -11,8 +11,8 @@ public class AddressBook
 	HashMap<String, LinkedList<Contact>> addressBooks = new HashMap<>();
 	LinkedList<Contact> allContacts = new LinkedList<Contact>();
 	Scanner scanner = new Scanner(System.in);
-	
-	public Contact addContact()
+
+	public Contact addContact() 
 	{
 		Contact contact = new Contact();
 		System.out.println("Enter First Name");
@@ -36,7 +36,8 @@ public class AddressBook
 		{
 			LinkedList<Contact> contactList = addressBooks.get(bookName);
 			addContactToExsistingBook(contact, bookName, contactList);
-		} else 
+		} 
+		else
 		{
 			allContacts.add(contact);
 			addressBooks.put(bookName, allContacts);
@@ -74,9 +75,9 @@ public class AddressBook
 	public boolean deleteContact(String phoneNumber) 
 	{
 
-		for (Contact contact : allContacts) 
+		for (Contact contact : allContacts)
 		{
-			if (contact.getPhonenumber() == phoneNumber) 
+			if (contact.getPhonenumber() == phoneNumber)
 			{
 				allContacts.remove(contact);
 				return operationStatus(true);
@@ -95,7 +96,7 @@ public class AddressBook
 		.forEach(contactInBook->System.out.println(contactInBook));
 	}
 
-	public void displayContact()
+	public void displayContact() 
 	{
 		for (String bookName : addressBooks.keySet())
 		{
@@ -104,20 +105,21 @@ public class AddressBook
 			displayContacts(contactList);
 		}
 	}
-	private static boolean operationStatus(boolean status) 
+
+	private static boolean operationStatus(boolean status)
 	{
 		if (status)
 		{
 			System.out.println("Contact Updated Successfully");
-		} 
-		else
+		}
+		else 
 		{
 			System.out.println("Contact not found");
 		}
 		return status;
 	}
 
-	private void addContactToExsistingBook(Contact contact, String bookName, LinkedList<Contact> contactList) 
+	private void addContactToExsistingBook(Contact contact, String bookName, LinkedList<Contact> contactList)
 	{
 		boolean isAlreadyExsist = contactList.stream()
 				.anyMatch(contactsInlist->contactsInlist.getFirstname()==contact.getFirstname());
@@ -126,17 +128,16 @@ public class AddressBook
 			contactList.add(contact);
 			addressBooks.put(bookName, contactList);
 			System.out.println("New Contact Added Sucessfully");
-		}
-		else
+		} 
+		else 
 		{
 			System.out.println("Contact already exsist");
 		}
 	}
-
 	public int searchPerson(String searchKey)
 	{
 		int count = 0;
-		for (String bookName : addressBooks.keySet())
+		for (String bookName : addressBooks.keySet()) 
 		{
 			LinkedList<Contact> contactList = addressBooks.get(bookName);
 			contactList.stream()
@@ -145,10 +146,9 @@ public class AddressBook
 		}
 		return count; 
 	}
-
-	public void viewPerson(String viewKey) 
+	public void viewPerson(String viewKey)
 	{
-		for (String bookName : addressBooks.keySet())
+		for (String bookName : addressBooks.keySet()) 
 		{
 			LinkedList<Contact> contactList = addressBooks.get(bookName);
 			contactList.stream()
@@ -163,5 +163,36 @@ public class AddressBook
 				LinkedList<Contact> contatct = addressBooks.get(bookName);
 			 	contatct.stream().sorted(Comparator.comparing(Contact::getFirstname)).forEach(n->System.out.println(n));
 			}
+		}
+		public void sortBY(int sortByWhich)
+		{
+			switch (sortByWhich)
+			{
+			case 1:
+				for (String bookName : addressBooks.keySet())
+				{
+					LinkedList<Contact> contatct = addressBooks.get(bookName);
+				 	contatct.stream().sorted(Comparator.comparing(Contact::getCity)).forEach(n->System.out.println(n));
+				}
+				break;
+			case 2:
+				for (String bookName : addressBooks.keySet())
+				{
+					LinkedList<Contact> contatct = addressBooks.get(bookName);
+					contatct.stream().sorted(Comparator.comparing(Contact::getState)).forEach(n->System.out.println(n));
+				}
+				break;
+			case 3:				
+				for (String bookName : addressBooks.keySet())
+				{
+					LinkedList<Contact> contatct = addressBooks.get(bookName);
+					contatct.stream().sorted(Comparator.comparing(Contact::getZipcode)).forEach(n->System.out.println(n));
+				}
+				break;
+			default:
+				System.out.println("Invalid Inout");
+				break;
+			}
+
 		}
 }
